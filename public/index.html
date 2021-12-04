@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+</head>
+
+<body>
+  <!-- The Homepage layout design -->
+  <h1>Restaurant locator App</h1>
+  <p>
+  <u>History of Cuisines and their diversification:</u> <br>
+  <!-- utilizing teammate's micoservice -->
+  <p id="history"> </p>
+  <p>For the full article visit: <a href='https://www.encyclopedia.com/food/encyclopedias-almanacs-transcripts-and-maps/cuisine-evolution'>Evolution of Cuisines</a>
+  </p>
+  <button id='info'>
+    <a href='information.html'>Information</a>
+  </button> 
+  <br>
+  <!-- Prompts the user to input their requests -->
+  <form method='POST'>
+    Current location: <br>
+    Latitude: <span id='latitude'></span>&deg;<br>
+    Longitude: <span id='longitude'></span>&deg;<br>
+  </form><br>
+  <form id="form" action='results.html' method="post">
+    <div class="label">
+      Enter Cuisine:
+    </div>
+    <div class="autocomplete">
+      <input type="text" id="food" autocomplete="off">
+    </div> <br>
+    <div class="label">
+      location:
+    </div>
+    <div class="autocomplete">
+      <input type="text" id="location" autocomplete="off">
+    </div> <br>
+    <div class='search'>
+      <button id="searchFood">
+        Search
+      </button>
+    </div> <br>
+  </form>
+  </p>
+  <div id="my_map_add" style="width:100%;height:450px;"></div>
+  <div id='results'>
+    <h2>The Results are:</h2>
+<!-- A table listing all the restaurants and their yelp websites -->
+    <table>
+      <tr>
+        <th>Restaurant:</th>
+        <th>Yelp Website:</th>
+      </tr>
+      <tr>
+        <td id='rn0'></td>
+        <td id='rl0'></td>
+      </tr>
+      <tr>
+        <td id='rn1'></td>
+        <td id='rl1'></td>
+      </tr>
+      <tr>
+        <td id='rn2'></td>
+        <td id='rl2'></td>
+      </tr>
+      <tr>
+        <td id='rn3'></td>
+        <td id='rl3'></td>
+      </tr>
+      <tr>
+        <td id='rn4'></td>
+        <td id='rl4'></td>
+      </tr>
+      <tr>
+        <td id='rn5'></td>
+        <td id='rl5'></td>
+      </tr>
+      <tr>
+        <td id='rn6'></td>
+        <td id='rl6'></td>
+      </tr>
+      <tr>
+        <td id='rn7'></td>
+        <td id='rl7'></td>
+      </tr>
+      <tr>
+        <td id='rn8'></td>
+        <td id='rl8'></td>
+      </tr>
+      <tr>
+        <td id='rn9'></td>
+        <td id='rl9'></td>
+      </tr>
+      <tr>
+        <td id='rn10'></td>
+        <td id='rl10'></td>
+      </tr>
+      <tr>
+        <td id='rn11'></td>
+        <td id='rl11'></td>
+      </tr>
+      <tr>
+        <td id='rn12'></td>
+        <td id='rl12'></td>
+      </tr>
+      <tr>
+        <td id='rn13'></td>
+        <td id='rl13'></td>
+      </tr>
+      <tr>
+        <td id='rn14'></td>
+        <td id='rl14'></td>
+      </tr>
+      <tr>
+        <td id='rn15'></td>
+        <td id='rl15'></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+  <button onClick="window.location.reload();">Pick New Cuisine and Location</button>
+  </div>
+  <div id='webscrap'>
+
+  </div>
+
+
+</body>
+
+
+<script type="text/javascript">
+// determines the longitude and latitude of the user's current position
+  function my_map_add() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const lat = position.coords.latitude;
+      const long = position.coords.longitude;
+
+      document.getElementById('latitude').textContent = lat;
+      document.getElementById('longitude').textContent = long;
+      console.log(position);
+      var curLat = lat;
+      var curLong = long;
+      var locationData = [curLat, curLong]
+
+
+      var myMapCenter = new google.maps.LatLng(lat, long);
+      var myMapProp = { center: myMapCenter, zoom: 12, scrollwheel: false, draggable: false, mapTypeId: google.maps.MapTypeId.ROADMAP };
+      var map = new google.maps.Map(document.getElementById("my_map_add"), myMapProp);
+      var marker = new google.maps.Marker({ position: myMapCenter });
+      marker.setMap(map);
+
+    });
+  }
+</script>
+<!-- utilizes the google maps api to display the location on a map -->
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOuf-lx4cG50XT8SSWZDDYnS6pXhe3qrA&callback=my_map_add"></script>
+<script type="text/javascript" src="Client.js"></script>
+<script type="text/javascript" src="teammateservice.js"></script>
+
+</html>
